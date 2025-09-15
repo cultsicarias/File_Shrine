@@ -1,0 +1,330 @@
+body {
+    background-color: #1a1a2e; /* Fallback color */
+    color: #e0e0e0;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    object-fit: cover;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px; /* Increased width for the grid layout */
+    background: rgba(15, 12, 41, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(176, 190, 255, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    text-align: center;
+}
+
+header h1 {
+    color: #ff6ac1;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #ff6ac1, 0 0 20px #ff6ac1;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #a0a0d0;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.upload-box {
+    border: 3px dashed #4a4a8a;
+    border-radius: 10px;
+    padding: 30px 20px;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+.upload-box.dragover {
+    background-color: rgba(176, 190, 255, 0.1);
+    border-color: #ff6ac1;
+}
+
+/* ## SVG Icon Styling ## */
+.upload-icon {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 15px;
+    fill: #ff6ac1;
+    transition: fill 0.3s;
+}
+
+.file-label {
+    background-color: #ff6ac1;
+    color: #1a1a2e;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.file-label:hover {
+    background-color: #ff8ed0;
+    box-shadow: 0 0 15px #ff6ac1;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.password-input {
+    display: block;
+    width: 60%;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: rgba(42, 42, 74, 0.7);
+    border: 1px solid #4a4a8a;
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.password-input::placeholder {
+    color: #a0a0d0;
+}
+
+.password-input:focus {
+    outline: none;
+    border-color: #ff6ac1;
+    box-shadow: 0 0 10px #ff6ac1;
+}
+
+.progress-bar-container {
+    position: relative; /* For positioning the speed indicator */
+    width: 100%;
+    background-color: #2a2a4a;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 24px;
+    background: linear-gradient(90deg, #ff6ac1, #b14ac0);
+    border-radius: 5px;
+    transition: width 0.2s ease;
+}
+
+/* ## Speed Indicator Styling ## */
+.speed-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e0e0e0;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+#status-message {
+    margin-top: 15px;
+    font-size: 1em;
+    min-height: 24px;
+}
+
+.file-list-container {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.file-list-container h2 {
+    color: #00f5d4;
+    text-shadow: 0 0 8px #00f5d4;
+    border-bottom: 2px solid #00f5d4;
+    padding-bottom: 10px;
+}
+
+/* ## File Grid and Card Styling ## */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.file-card {
+    background: rgba(42, 42, 74, 0.7);
+    border-radius: 10px;
+    border-left: 5px solid #00f5d4;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 245, 212, 0.2);
+}
+
+.file-preview {
+    width: 100%;
+    height: 180px;
+    background-color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-preview img,
+.file-preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-preview audio {
+    width: 90%;
+}
+
+.file-preview .generic-icon {
+    width: 80px;
+    height: 80px;
+    fill: #a0a0d0;
+}
+
+.file-info {
+    padding: 15px;
+}
+
+.file-name {
+    font-weight: bold;
+    color: #e0e0e0;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-meta {
+    font-size: 0.8em;
+    color: #a0a0d0;
+    margin-top: 5px;
+}
+
+.file-actions {
+    padding: 0 15px 15px;
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    flex-grow: 1;
+    text-decoration: none;
+    text-align: center;
+    color: #1a1a2e;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.download-btn {
+    background-color: #00f5d4;
+}
+
+.download-btn:hover {
+    background-color: #5effe7;
+    box-shadow: 0 0 15px #00f5d4;
+}
+
+footer {
+    margin-top: 30px;
+    color: #a0a0d0;
+    font-size: 0.9em;
+}
+
+/* ## NEW: Styles for Login Overlay and Hidden Content ## */
+.hidden {
+    display: none !important;
+}
+
+#login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 12, 41, 0.7);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.login-box {
+    text-align: center;
+    background: rgba(15, 12, 41, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(176, 190, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.login-box h1 {
+    color: #ff6ac1;
+    text-shadow: 0 0 10px #ff6ac1;
+}
+
+.login-box p {
+    color: #a0a0d0;
+    margin-bottom: 25px;
+}
+
+#login-form .password-input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#login-form .file-label {
+    width: 100%;
+    border: none;
+}
+
+#login-status {
+    margin-top: 15px;
+    min-height: 24px;
+    color: #ff6ac1;
+}
+
+/* Make password input in upload box disappear */
+.upload-box .password-input {
+    display: none;
+}
+
+/* ## NEW: Style for when the upload box is busy ## */
+.upload-box.upload-busy {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
