@@ -59,15 +59,43 @@ Server runs at `http://localhost:3000`.
 - Do not hardcode secrets. Use environment variables or a secrets manager.
 - Consider adding basic rate limiting and MIME validation in production.
 
-## Using ngrok (optional)
-An `ngrok.exe` is included for tunneling during demos.
+## Setting up ngrok for Tunneling
+
+To expose your local File_Shrine to the internet for sharing or testing, follow these steps:
+
+### Step 1: Download ngrok
+- Visit [ngrok.com](https://ngrok.com/) and sign up for a free account
+- Download the ngrok executable for your platform
+- Extract `ngrok.exe` to your project directory (already included in this repo)
+
+### Step 2: Authenticate ngrok
 ```bash
-# In one terminal
+# Get your authtoken from https://dashboard.ngrok.com/get-started/your-authtoken
+ngrok config add-authtoken YOUR_AUTHTOKEN_HERE
+```
+
+### Step 3: Start your File_Shrine server
+```bash
 npm start
-# In another
+```
+Your server will run at `http://localhost:3000`
+
+### Step 4: Create a tunnel
+In a new terminal window:
+```bash
 ngrok http 3000
 ```
-Copy the public URL from ngrok to share your File_Shrine temporarily.
+
+### Step 5: Access your public URL
+- ngrok will display a forwarding URL like `https://abc123.ngrok.io`
+- Copy this URL and share it with others
+- Anyone with this URL can access your File_Shrine
+
+### Step 6: Stop the tunnel
+- Press `Ctrl+C` in the ngrok terminal to stop the tunnel
+- Your local server continues running until you stop it with `Ctrl+C` in the npm terminal
+
+**Note:** Free ngrok tunnels expire after 2 hours and URLs change each time you restart ngrok. For permanent URLs, consider upgrading to a paid ngrok plan.
 
 ## License
 ISC (see `package.json`).
